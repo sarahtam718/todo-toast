@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 export default class CreateTodo extends Component {
   constructor(props) {
@@ -30,7 +31,19 @@ export default class CreateTodo extends Component {
     e.preventDefault();
     console.log("form submitted");
     console.log("todo state: ", this.state);
-    // need submit logic to send data to backend
+
+    // send data from state (from form) to backend
+    const newTodo = {
+      todo_description: this.state.todo_description,
+      todo_responsible: this.state.todo_responsible,
+      todo_priority: this.state.todo_priority,
+      todo_completed: this.state.todo_completed
+    };
+
+    axios
+      .post("http://localhost:8000/todos/add", newTodo)
+      .then(res => console.log(res.data));
+
     this.setState({
       todo_description: "",
       todo_responsible: "",

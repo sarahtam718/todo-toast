@@ -26,7 +26,7 @@ function App() {
             Todo Toast
           </Link>
           <div className="collapse navbar-collapse">
-            <ul className="navbar-nav mr-auto">
+            <ul className="nav navbar-nav mr-auto">
               <li className="nav-item">
                 <Link to="/" className="nav-link">
                   Tasks
