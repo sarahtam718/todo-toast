@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import TodosList from "./components/todos-list.js";
-import EditTodo from "./components/edit-todo.js";
-import CreateTodo from "./components/create-todo.js";
+import TodosList from "./components/todos-list.js.js";
+import EditTodo from "./components/edit-todo.js.js";
+import CreateTodo from "./components/create-todo.js.js";
 import toast from "./components/toast.png";
 
 function App() {
