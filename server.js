@@ -19,7 +19,7 @@ mongoose.connect("mongodb://localhost:27017/todos", { useNewUrlParser: true });
 const connection = mongoose.connection;
 
 connection.once("open", () => {
-  console.log("MongoDB connection succesful!");
+  console.log("MongoDB connection successful!");
 });
 
 // extends from /todos route
@@ -40,11 +40,7 @@ todoRoutes.route("/:id").get(function(req, res) {
   // how do we know which item the user wants? grab from url path params
   let id = req.params.id;
   Todo.findById(id, function(err, todo) {
-    if (err) {
-      console.log(err);
-    } else {
-      res.json(todo);
-    }
+    res.json(todo);
   });
 });
 

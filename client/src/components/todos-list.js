@@ -69,7 +69,7 @@ export default class TodosList extends Component {
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>{this.state.todoList}</tbody>
+          <tbody>{this.todoList()}</tbody>
         </table>
       </div>
     );
