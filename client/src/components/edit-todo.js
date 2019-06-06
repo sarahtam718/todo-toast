@@ -88,7 +88,9 @@ export default class EditTodo extends Component {
             />
           </div>
           <div className="form-group">
-            <label>Responsible</label>
+            <label>
+              How much time do you want to allot to this task? (mins or hrs)
+            </label>
             <input
               type="text"
               className="form-control"

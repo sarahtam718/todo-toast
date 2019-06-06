@@ -3,13 +3,16 @@ const Schema = mongoose.Schema;
 
 let Todo = new Schema({
   todo_description: {
-    type: String
+    type: String,
+    trim: true
   },
   todo_responsible: {
-    type: String
+    type: String,
+    trim: true
   },
   todo_priority: {
-    type: String
+    type: String,
+    trim: true
   },
   todo_completed: {
     type: Boolean
