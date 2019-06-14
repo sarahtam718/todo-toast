@@ -5,6 +5,7 @@ import TodosList from "./components/todos-list.js";
 import EditTodo from "./components/edit-todo.js";
 import CreateTodo from "./components/create-todo.js";
 import toast from "./components/toast.png";
+import Timer from "./components/timer.js";
 
 function App() {
   return (
@@ -41,8 +42,8 @@ function App() {
             </ul>
           </div>
         </nav>
+        <Timer />
         <Route path="/" exact component={TodosList} />
-        {/* path that accepts parameter of id */}
         <Route path="/edit/:id" component={EditTodo} />
         <Route path="/create" component={CreateTodo} />
       </div>
