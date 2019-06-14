@@ -15,6 +15,7 @@ function App() {
             className="navbar-brand"
             href="https://github.com/sarahtam718?tab=repositories"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <img
               src={toast}
