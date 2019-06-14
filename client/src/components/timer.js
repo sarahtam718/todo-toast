@@ -11,9 +11,11 @@ export default class Timer extends Component {
   // }
 
   timer = seconds => {
+    clearInterval(timeLeft);
     const now = Date.now();
     const later = now + seconds * 1000;
     this.displayTimeLeft(seconds);
+    this.displayComeBack(later);
 
     timeLeft = setInterval(() => {
       const secondsLeft = Math.round((later - Date.now()) / 1000);
@@ -29,40 +31,54 @@ export default class Timer extends Component {
   displayTimeLeft = seconds => {
     const mins = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
-    console.log({ mins, remainingSeconds });
+    const displayTime = `${mins}:${
+      remainingSeconds < 10 ? "0" : ""
+    }${remainingSeconds}`;
+    // console.log({ mins, remainingSeconds });
+    console.log(displayTime);
   };
 
-  componentDidMount() {
-    this.timer(124);
-  }
+  displayComeBack = timestamp => {
+    const comeBack = new Date(timestamp);
+    const hour = comeBack.getHours();
+    const mins = comeBack.getMinutes();
+    console.log(
+      `Be Back at ${hour > 12 ? hour - 12 : hour}:${
+        mins < 10 ? "0" : ""
+      }${mins}`
+    );
+  };
+
+  startPomodoroTimer = () => {
+    // console.log(this);
+    this.timer(1500);
+  };
+
+  startQuickBreak = () => {
+    this.timer(300);
+  };
+
+  // componentDidMount() {
+  //   this.timer(124);
+  // }
 
   render() {
     return (
       <div className="timer">
-        <div className="timer__controls">
-          <button data-time="20" className="timer__button">
-            20 Secs
-          </button>
-          <button data-time="300" className="timer__button">
-            Work 5
-          </button>
-          <button data-time="900" className="timer__button">
-            Quick 15
-          </button>
-          <button data-time="1200" className="timer__button">
-            Snack 20
-          </button>
-          <button data-time="3600" className="timer__button">
-            Lunch Break
-          </button>
-          <form name="customForm" id="custom">
-            <input type="text" name="minutes" placeholder="Enter Minutes" />
-          </form>
-        </div>
-        <div className="display">
-          <h1 className="display__time-left" />
-          <p className="display__end-time" />
-        </div>
+        <button
+          data-time="20"
+          className="timer__button"
+          onClick={this.startPomodoroTimer}
+        >
+          Pomodoro Timer
+        </button>
+        <button
+          data-time="20"
+          className="timer__button"
+          onClick={this.startQuickBreak}
+        >
+          Quick Break
+        </button>
       </div>
     );
   }
