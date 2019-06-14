@@ -3,12 +3,14 @@ import React, { Component } from "react";
 let timeLeft;
 
 export default class Timer extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     count: 0
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      _isMounted: false,
+      timeRemaining: "#werk",
+      returnTime: "keep moving forward"
+    };
+  }
 
   timer = seconds => {
     clearInterval(timeLeft);
@@ -28,77 +30,63 @@ export default class Timer extends Component {
     }, 1000);
   };
 
+  componentDidMount() {
+    this.setState({ _isMounted: true });
+    this.startPomodoroTimer = () => {
+      this.timer(1500);
+    };
+
+    this.startQuickBreak = () => {
+      this.timer(300);
+    };
+  }
+
+  stopEverything = () => {
+    clearInterval(timeLeft);
+    this.setState({
+      _isMounted: false,
+      timeRemaining: "#werk",
+      returnTime: "keep moving forward"
+    });
+  };
+
   displayTimeLeft = seconds => {
     const mins = Math.floor(seconds / 60);
     const remainingSeconds = seconds % 60;
     const displayTime = `${mins}:${
       remainingSeconds < 10 ? "0" : ""
     }${remainingSeconds}`;
-    // console.log({ mins, remainingSeconds });
-    console.log(displayTime);
+    this.setState({ timeRemaining: displayTime });
   };
 
   displayComeBack = timestamp => {
     const comeBack = new Date(timestamp);
     const hour = comeBack.getHours();
     const mins = comeBack.getMinutes();
-    console.log(
-      `Be Back at ${hour > 12 ? hour - 12 : hour}:${
+    this.setState({
+      returnTime: `${hour > 12 ? hour - 12 : hour}:${
         mins < 10 ? "0" : ""
       }${mins}`
-    );
+    });
   };
 
-  startPomodoroTimer = () => {
-    // console.log(this);
-    this.timer(1500);
-  };
-
-  startQuickBreak = () => {
-    this.timer(300);
-  };
-
-  // componentDidMount() {
-  //   this.timer(124);
-  // }
+  componentWillUnmount() {
+    this.setState({
+      _isMounted: false,
+      timeRemaining: "#werk",
+      returnTime: "keep moving forward"
+    });
+  }
 
   render() {
     return (
       <div className="timer">
-        <button
-          data-time="20"
-          className="timer__button"
-          onClick={this.startPomodoroTimer}
-        >
-          Pomodoro Timer
-        </button>
-        <button
-          data-time="20"
-          className="timer__button"
-          onClick={this.startQuickBreak}
-        >
-          Quick Break
-        </button>
+        <button onClick={this.startPomodoroTimer}>Pomodoro Timer</button>
+        <button onClick={this.startQuickBreak}>Quick Break</button>
+        <button onClick={this.stopEverything}>Stop Everything</button>
+        <div id="countdown">Time Left: {this.state.timeRemaining}</div>
+        <div id="return">Return: {this.state.returnTime}</div>
       </div>
     );
   }
 }
-
-// componentDidMount = () => {
-// this.theInterval = setInterval(() => {
-//   this.setState({ count: this.state.count - 1 });
-// }, 1000);
-
-// if (this.state.count === 0) {
-//   clearInterval(this.theInterval);
-// }
-// };
-
-//   refresh() {
-//       this.setState({count: this.state.count})
-//   }
-
-// componentWillUnmount = () => {
-//   clearInterval(this.theInterval);
-// };
-// return <div>Timer: {this.state.count}</div>;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import Timer from "./timer.js";
+// import Timer from "./timer.js";
 
 const Todo = props => (
   <tr>
@@ -24,11 +24,13 @@ export default class TodosList extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      _isMounted: false,
       todos: []
     };
   }
 
   componentDidMount() {
+    this.setState({ _isMounted: true });
     axios
       .get("http://localhost:8000/todos/")
       .then(response => {
@@ -49,6 +51,10 @@ export default class TodosList extends Component {
       .catch(function(err) {
         console.log(err);
       });
+  }
+
+  componentWillUnmount() {
+    this.setState({ _isMounted: false });
   }
 
   todoList = () => {
@@ -72,7 +78,6 @@ export default class TodosList extends Component {
           </thead>
           <tbody>{this.todoList()}</tbody>
         </table>
-        <Timer />
       </div>
     );
   }
