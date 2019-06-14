@@ -3,12 +3,13 @@ import React, { Component } from "react";
 let timeLeft;
 
 export default class Timer extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     count: 0
-  //   };
-  // }
+  constructor(props) {
+    super(props);
+    this.state = {
+      timeRemaining: "#werk",
+      returnTime: "keep moving forward"
+    };
+  }
 
   timer = seconds => {
     clearInterval(timeLeft);
@@ -35,18 +36,26 @@ export default class Timer extends Component {
       remainingSeconds < 10 ? "0" : ""
     }${remainingSeconds}`;
     // console.log({ mins, remainingSeconds });
-    console.log(displayTime);
+    // console.log(displayTime);
+    this.setState({ timeRemaining: displayTime });
+    // console.log(this.state.timeRemaining);
   };
 
   displayComeBack = timestamp => {
     const comeBack = new Date(timestamp);
     const hour = comeBack.getHours();
     const mins = comeBack.getMinutes();
-    console.log(
-      `Be Back at ${hour > 12 ? hour - 12 : hour}:${
+    // console.log(
+    //   `Be Back at ${hour > 12 ? hour - 12 : hour}:${
+    //     mins < 10 ? "0" : ""
+    //   }${mins}`
+    // );
+    this.setState({
+      returnTime: `${hour > 12 ? hour - 12 : hour}:${
         mins < 10 ? "0" : ""
       }${mins}`
-    );
+    });
+    console.log(this.state.returnTime);
   };
 
   startPomodoroTimer = () => {
@@ -58,47 +67,18 @@ export default class Timer extends Component {
     this.timer(300);
   };
 
-  // componentDidMount() {
-  //   this.timer(124);
-  // }
+  componentDidMount() {
+    console.log("mounted");
+  }
 
   render() {
     return (
       <div className="timer">
-        <button
-          data-time="20"
-          className="timer__button"
-          onClick={this.startPomodoroTimer}
-        >
-          Pomodoro Timer
-        </button>
-        <button
-          data-time="20"
-          className="timer__button"
-          onClick={this.startQuickBreak}
-        >
-          Quick Break
-        </button>
+        <button onClick={this.startPomodoroTimer}>Pomodoro Timer</button>
+        <button onClick={this.startQuickBreak}>Quick Break</button>
+        <div id="countdown">Time Left: {this.state.timeRemaining}</div>
+        <div id="return">Return: {this.state.returnTime}</div>
       </div>
     );
   }
 }
-
-// componentDidMount = () => {
-// this.theInterval = setInterval(() => {
-//   this.setState({ count: this.state.count - 1 });
-// }, 1000);
-
-// if (this.state.count === 0) {
-//   clearInterval(this.theInterval);
-// }
-// };
-
-//   refresh() {
-//       this.setState({count: this.state.count})
-//   }
-
-// componentWillUnmount = () => {
-//   clearInterval(this.theInterval);
-// };
-// return <div>Timer: {this.state.count}</div>;

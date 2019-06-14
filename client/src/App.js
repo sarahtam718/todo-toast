@@ -9,7 +9,7 @@ import toast from "./components/toast.png";
 function App() {
   return (
     <Router>
-      <div className="container">
+      <div className="container-fluid">
         <nav className="navbar navbar-expand navbar-light bg-light">
           <a
             className="navbar-brand"
