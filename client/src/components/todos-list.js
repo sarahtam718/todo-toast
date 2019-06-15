@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import Timer from "./timer.js";
 
 const Todo = props => (
   <tr>
@@ -65,7 +64,7 @@ export default class TodosList extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container-fluid">
         <h3>Task List</h3>
         <table className="table table-striped" style={{ marginTop: 20 }}>
           <thead>

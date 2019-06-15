@@ -10,8 +10,8 @@ import Timer from "./components/timer.js";
 function App() {
   return (
     <Router>
-      <div className="container-fluid">
-        <nav className="navbar navbar-expand navbar-light bg-light">
+      <div>
+        <nav className="navbar navbar-expand navbar-light bg-info shadow-sm">
           <a
             className="navbar-brand"
             href="https://github.com/sarahtam718?tab=repositories"
@@ -24,18 +24,33 @@ function App() {
               alt="sarahtam718-github"
             />
           </a>
-          <Link to="/" className="navbar-brand">
+          <Link
+            to="/"
+            style={{
+              color: "white",
+              fontWeight: "bold"
+            }}
+            className="navbar-brand"
+          >
             Todo Toast
           </Link>
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav mr-auto">
               <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link
+                  to="/"
+                  style={{ color: "white", fontSize: 18 }}
+                  className="nav-link"
+                >
                   Tasks
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/create" className="nav-link">
+                <Link
+                  to="/create"
+                  style={{ color: "white", fontSize: 18 }}
+                  className="nav-link"
+                >
                   Create Task
                 </Link>
               </li>

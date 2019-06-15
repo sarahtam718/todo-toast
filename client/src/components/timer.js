@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./../App.css";
 
 let timeLeft;
 
@@ -8,7 +9,7 @@ export default class Timer extends Component {
     this.state = {
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: "keep moving forward"
+      returnTime: ""
     };
   }
 
@@ -46,7 +47,7 @@ export default class Timer extends Component {
     this.setState({
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: "keep moving forward"
+      returnTime: ""
     });
   };
 
@@ -74,18 +75,30 @@ export default class Timer extends Component {
     this.setState({
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: "keep moving forward"
+      returnTime: ""
     });
   }
 
   render() {
     return (
       <div className="timer">
-        <button onClick={this.startPomodoroTimer}>Pomodoro Timer</button>
-        <button onClick={this.startQuickBreak}>Quick Break</button>
-        <button onClick={this.stopEverything}>Stop Everything</button>
-        <div id="countdown">Time Left: {this.state.timeRemaining}</div>
-        <div id="return">Return: {this.state.returnTime}</div>
+        <div
+          style={{
+            display: "flex"
+          }}
+        >
+          <button onClick={this.startPomodoroTimer}>Focused Work</button>
+          <button onClick={this.startQuickBreak}>Brain Break</button>
+          <button onClick={this.stopEverything}>Done!</button>
+        </div>
+        <div
+          style={{
+            display: "flex"
+          }}
+        >
+          <h5>Time Left: {this.state.timeRemaining}</h5>
+          <h5>Return by {this.state.returnTime}</h5>
+        </div>
       </div>
     );
   }
