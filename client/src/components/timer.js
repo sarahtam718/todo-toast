@@ -9,7 +9,7 @@ export default class Timer extends Component {
     this.state = {
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: ""
+      returnTime: "..."
     };
   }
 
@@ -47,7 +47,7 @@ export default class Timer extends Component {
     this.setState({
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: ""
+      returnTime: "..."
     });
   };
 
@@ -75,13 +75,13 @@ export default class Timer extends Component {
     this.setState({
       _isMounted: false,
       timeRemaining: "#werk",
-      returnTime: ""
+      returnTime: "..."
     });
   }
 
   render() {
     return (
-      <div className="timer">
+      <div className="timer container">
         <div
           style={{
             display: "flex"
