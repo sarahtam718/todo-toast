@@ -84,6 +84,29 @@ todoRoutes.route("/update/:id").post(function(req, res) {
   });
 });
 
+// delete todo based on id of selected item
+todoRoutes.route("/delete/:id").post(function(req, res) {
+  Todo.findById(req.params.id, function(err, todo) {
+    // if not able to grab item...
+    if (!todo) res.status(404).send("data not found");
+    // objfromdb.key set to what was submitted in body (form)
+    else todo.todo_description = req.body.todo_description;
+    todo.todo_responsible = req.body.todo_responsible;
+    todo.todo_priority = req.body.todo_priority;
+    todo.todo_completed = req.body.todo_completed;
+
+    // delete from db
+    todo
+      .delete()
+      .then(result => {
+        res.json("Todo deleted");
+      })
+      .catch(err => {
+        res.status(400).send("delete not possible");
+      });
+  });
+});
+
 app.use("/todos", todoRoutes);
 
 app.listen(PORT, function() {

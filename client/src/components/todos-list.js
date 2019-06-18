@@ -14,7 +14,8 @@ const Todo = props => (
       {props.todo.todo_priority}
     </td>
     <td>
-      <Link to={"/edit/" + props.todo._id}>Edit</Link>
+      <Link to={"/edit/" + props.todo._id}>Edit</Link>{" "}
+      <Link to={"/delete/" + props.todo._id}>Delete</Link>
     </td>
   </tr>
 );

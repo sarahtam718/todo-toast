@@ -6,6 +6,7 @@ import EditTodo from "./components/edit-todo.js";
 import CreateTodo from "./components/create-todo.js";
 import toast from "./components/toast.png";
 import Timer from "./components/timer.js";
+import DeleteTodo from "./components/delete-todo.js";
 
 function App() {
   return (
@@ -61,6 +62,7 @@ function App() {
         <Route path="/" exact component={TodosList} />
         <Route path="/edit/:id" component={EditTodo} />
         <Route path="/create" component={CreateTodo} />
+        <Route path="/delete/:id" component={DeleteTodo} />
       </div>
     </Router>
   );
