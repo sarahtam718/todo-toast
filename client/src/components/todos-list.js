@@ -49,7 +49,7 @@ export default class TodosList extends Component {
         this.setState({ todos: response.data });
       })
       .catch(function(err) {
-        console.log(err);
+        console.log(err, "something is wrong in component did update");
       });
   }
 

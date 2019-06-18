@@ -11,8 +11,6 @@ let Todo = require("./models/todo");
 // middleware
 app.use(cors());
 app.use(bodyParser.json());
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
 
 // connecting to db
 mongoose.connect("mongodb://localhost:27017/todos", { useNewUrlParser: true });
@@ -37,7 +35,7 @@ todoRoutes.route("/").get(function(req, res) {
 
 // grabs a todo item from db based on user choice
 todoRoutes.route("/:id").get(function(req, res) {
-  // how do we know which item the user wants? grab from url path params
+  // how do we know which item the user wants? grab from url path aka req.params
   let id = req.params.id;
   Todo.findById(id, function(err, todo) {
     res.json(todo);
@@ -85,25 +83,21 @@ todoRoutes.route("/update/:id").post(function(req, res) {
 });
 
 // delete todo based on id of selected item
-todoRoutes.route("/delete/:id").post(function(req, res) {
+todoRoutes.route("/remove/:id").post(function(req, res) {
   Todo.findById(req.params.id, function(err, todo) {
     // if not able to grab item...
     if (!todo) res.status(404).send("data not found");
-    // objfromdb.key set to what was submitted in body (form)
-    else todo.todo_description = req.body.todo_description;
-    todo.todo_responsible = req.body.todo_responsible;
-    todo.todo_priority = req.body.todo_priority;
-    todo.todo_completed = req.body.todo_completed;
-
+    // console.log("delete id route here", todo);
     // delete from db
-    todo
-      .delete()
-      .then(result => {
-        res.json("Todo deleted");
-      })
-      .catch(err => {
-        res.status(400).send("delete not possible");
-      });
+    else
+      todo
+        .remove()
+        .then(result => {
+          res.json("Todo deleted");
+        })
+        .catch(err => {
+          res.status(400).send("delete not possible");
+        });
   });
 });
 

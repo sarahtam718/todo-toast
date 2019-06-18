@@ -4,20 +4,20 @@ import axios from "axios";
 export default class DeleteTodo extends Component {
   componentDidMount(props) {
     axios
-      .get("http://localhost:8000/todos/delete/" + this.props.match.params.id)
+      .post("http://localhost:8000/todos/remove/" + this.props.match.params.id)
       .then(response => {
-        console.log("delete working", response);
+        console.log("delete working", response.data);
       })
       .catch(function(err) {
         console.log(err);
       });
-    // console.log("hello from delete component", this.props.match.params);
+    this.props.history.push("/");
   }
 
   render() {
     return (
       <div>
-        <h3>Delete Successful :D</h3>
+        <h3 className="container">Delete Successful :D</h3>
       </div>
     );
   }
