@@ -68,14 +68,14 @@ export default class EditTodo extends Component {
         obj
       )
       .then(res => {
-        console.log(res.data);
+        console.log("Edit Successful");
       });
     this.props.history.push("/");
   };
 
   render() {
     return (
-      <div>
+      <div className="container">
         <h3>Update Task</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -111,30 +111,31 @@ export default class EditTodo extends Component {
               />
               <label className="form-check-label">Low</label>
             </div>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="PriorityOptions"
-              id="priorityMedium"
-              value="Medium"
-              checked={this.state.todo_priority === "Medium"}
-              onChange={this.onChangeTodoPriority}
-            />
-            <label className="form-check-label">Medium</label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="PriorityOptions"
-              id="priorityHigh"
-              value="High"
-              checked={this.state.todo_priority === "High"}
-              onChange={this.onChangeTodoPriority}
-            />
-            <label className="form-check-label">High</label>
+
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="PriorityOptions"
+                id="priorityMedium"
+                value="Medium"
+                checked={this.state.todo_priority === "Medium"}
+                onChange={this.onChangeTodoPriority}
+              />
+              <label className="form-check-label">Medium</label>
+            </div>
+            <div className="form-check form-check-inline">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="PriorityOptions"
+                id="priorityHigh"
+                value="High"
+                checked={this.state.todo_priority === "High"}
+                onChange={this.onChangeTodoPriority}
+              />
+              <label className="form-check-label">High</label>
+            </div>
           </div>
           <div className="form-check">
             <input

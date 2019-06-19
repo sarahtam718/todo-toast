@@ -6,7 +6,7 @@ export default class DeleteTodo extends Component {
     axios
       .post("http://localhost:8000/todos/remove/" + this.props.match.params.id)
       .then(response => {
-        console.log("delete working", response.data);
+        console.log("Delete Successful");
       })
       .catch(function(err) {
         console.log(err);

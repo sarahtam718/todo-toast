@@ -29,9 +29,6 @@ export default class CreateTodo extends Component {
   //   when submitting form, we only want to send data to backend once, so preventDefault is used, plus we want to reset the state so user can submit new form (new todo)
   onSubmit = e => {
     e.preventDefault();
-    console.log("form submitted");
-    console.log("todo state: ", this.state);
-
     // send data from state (from form) to backend
     const newTodo = {
       todo_description: this.state.todo_description,
@@ -40,21 +37,21 @@ export default class CreateTodo extends Component {
       todo_completed: this.state.todo_completed
     };
 
-    axios
-      .post("http://localhost:8000/todos/add", newTodo)
-      .then(res => console.log(res.data));
-
+    axios.post("http://localhost:8000/todos/add", newTodo).then(res => {
+      console.log("Task Added Successfully");
+    });
     this.setState({
       todo_description: "",
       todo_responsible: "",
       todo_priority: "",
       todo_completed: false
     });
+    this.props.history.push("/");
   };
 
   render() {
     return (
-      <div style={{ marginTop: 20 }}>
+      <div className="container" style={{ marginTop: 20 }}>
         <h3>Create New Task</h3>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
@@ -68,7 +65,8 @@ export default class CreateTodo extends Component {
           </div>
           <div className="form-group">
             <label>
-              How much time do you want to allot to this task? (mins or hrs)
+              How much time do you want to allot to this task? (What can you
+              accomplish just today?)
             </label>
             <input
               type="text"
@@ -90,30 +88,31 @@ export default class CreateTodo extends Component {
               />
               <label className="form-check-label">Low</label>
             </div>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="PriorityOptions"
-              id="priorityMedium"
-              value="Medium"
-              checked={this.state.todo_priority === "Medium"}
-              onChange={this.onChangeTodoPriority}
-            />
-            <label className="form-check-label">Medium</label>
-          </div>
-          <div className="form-check form-check-inline">
-            <input
-              className="form-check-input"
-              type="radio"
-              name="PriorityOptions"
-              id="priorityHigh"
-              value="High"
-              checked={this.state.todo_priority === "High"}
-              onChange={this.onChangeTodoPriority}
-            />
-            <label className="form-check-label">High</label>
+
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="PriorityOptions"
+                id="priorityMedium"
+                value="Medium"
+                checked={this.state.todo_priority === "Medium"}
+                onChange={this.onChangeTodoPriority}
+              />
+              <label className="form-check-label">Medium</label>
+            </div>
+            <div className="form-check">
+              <input
+                className="form-check-input"
+                type="radio"
+                name="PriorityOptions"
+                id="priorityHigh"
+                value="High"
+                checked={this.state.todo_priority === "High"}
+                onChange={this.onChangeTodoPriority}
+              />
+              <label className="form-check-label">High</label>
+            </div>
           </div>
           <div className="form-group">
             <input

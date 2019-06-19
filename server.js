@@ -42,9 +42,9 @@ todoRoutes.route("/:id").get(function(req, res) {
   });
 });
 
-// add new items to todo db (remember: you can't tell when something was truly added without looking in the db at this point, so...)
+// add new items to todo db
 todoRoutes.route("/add").post(function(req, res) {
-  // how do we know what user wants to add? grab from body & create new object based on model schema
+  // how do we know what user wants to add? grab from req.body & create new object based on model schema
   let todo = new Todo(req.body);
   todo
     .save()
@@ -87,7 +87,6 @@ todoRoutes.route("/remove/:id").post(function(req, res) {
   Todo.findById(req.params.id, function(err, todo) {
     // if not able to grab item...
     if (!todo) res.status(404).send("data not found");
-    // console.log("delete id route here", todo);
     // delete from db
     else
       todo

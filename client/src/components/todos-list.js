@@ -34,7 +34,6 @@ export default class TodosList extends Component {
     axios
       .get("http://localhost:8000/todos/")
       .then(response => {
-        // console.log("working get req", response.data);
         this.setState({ todos: response.data });
       })
       .catch(function(err) {
