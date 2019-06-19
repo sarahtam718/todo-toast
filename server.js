@@ -5,12 +5,14 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const todoRoutes = express.Router();
 const PORT = process.env.PORT || 8000;
+const path = require("path");
 
 let Todo = require("./models/todo");
 
 // middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, "client", "build")));
 
 // connecting to db
 mongoose.connect("mongodb://localhost:27017/todos", { useNewUrlParser: true });
@@ -101,6 +103,10 @@ todoRoutes.route("/remove/:id").post(function(req, res) {
 });
 
 app.use("/todos", todoRoutes);
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 
 app.listen(PORT, function() {
   console.log("App listening on PORT:" + PORT);
