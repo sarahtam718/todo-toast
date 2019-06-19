@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 // connecting to db
-mongoose.connect("mongodb://localhost:27017/todos", { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/todos", {
+  useNewUrlParser: true
+});
 const connection = mongoose.connection;
 
 connection.once("open", () => {
