@@ -18,13 +18,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, "client", "build")));
 
 // connecting to db
-mongoose.connect(
-  "mongodb://heroku_nc31r6w5:3jv0g26eallf58j4lfoog49gl0@ds239967.mlab.com:39967/heroku_nc31r6w5" ||
-    "mongodb://localhost:27017/todos",
-  {
-    useNewUrlParser: true
-  }
-);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/todos", {
+  useNewUrlParser: true
+});
 const connection = mongoose.connection;
 
 connection.once("open", () => {
