@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 const todoRoutes = express.Router();
 const PORT = process.env.PORT || 8000;
 const path = require("path");
+const dotenv = require("dotenv");
+
+require("dotenv").config();
 
 let Todo = require("./models/todo");
 

@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "start": "node server.js",
-    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -17,6 +13,10 @@
     "express": "^4.17.1",
     "mongoose": "^5.5.11",
     "negotiator": "^0.6.2"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "engines": {
     "node": "10.15.0"
